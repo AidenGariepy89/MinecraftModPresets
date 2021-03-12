@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Owner\\source\\repos\\_Projects\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj": {}
+    "C:\\Users\\Owner\\source\\gitHub\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Owner\\source\\repos\\_Projects\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj": {
+    "C:\\Users\\Owner\\source\\gitHub\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Owner\\source\\repos\\_Projects\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj",
+        "projectUniqueName": "C:\\Users\\Owner\\source\\gitHub\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj",
         "projectName": "MinecraftModPresets",
-        "projectPath": "C:\\Users\\Owner\\source\\repos\\_Projects\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj",
+        "projectPath": "C:\\Users\\Owner\\source\\gitHub\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj",
         "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Owner\\source\\repos\\_Projects\\MinecraftModPresets\\MinecraftModPresets\\obj\\",
+        "outputPath": "C:\\Users\\Owner\\source\\gitHub\\MinecraftModPresets\\MinecraftModPresets\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config",

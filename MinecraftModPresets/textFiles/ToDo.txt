@@ -5,7 +5,7 @@
 (done) Start Logic for Creating Presets
 
 - Create Preset Loading <<<
-	- Make it so it wont send mod from storage to active if it is already in active
+	(done) Make it so it wont send mod from storage to active if it is already in active
 - Create List of Files to Ignore Entirely
 
 - Everything else lol

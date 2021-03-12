@@ -1,0 +1,37 @@
+Log > Startup
+
+Log > Version 1 created
+Log > Saved Version 1 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1_865199_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Deleted 1
+Log > Version 1.12.2 created
+Log > Version 1.12.2aasdfasdf:491123 edited
+Log > Version 1.12.2:491123 edited
+Log > Saved Version 1.12.2 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1.12.2_491123_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Deleted 1.12.2
+Log > Version 1.12.2 created
+Log > Saved Version 1.12.2 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1.12.2_488112_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Startup
+
+Log > Startup
+
+Log > Exiting
+

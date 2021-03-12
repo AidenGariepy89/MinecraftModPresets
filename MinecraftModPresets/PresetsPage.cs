@@ -176,7 +176,7 @@ namespace MinecraftModPresets
                 bool moveToActive = false;
                 foreach (var activeMod in activeMods)
                 {
-                    if (file == activeMod.FileName) // || Path.GetFileName(file) == activeMod.Name)
+                    if (file == activeMod.FileName || Path.GetFileName(file) == activeMod.Name)
                     {
                         moveToActive = true;
                     }
@@ -188,6 +188,11 @@ namespace MinecraftModPresets
                     {
                         moveToActive = true;
                     }
+                }
+
+                if (File.Exists(Path.Combine(Version.ActiveFolderPath, Path.GetFileName(file))))
+                {
+                    moveToActive = false;
                 }
 
                 if (moveToActive)
