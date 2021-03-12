@@ -1,0 +1,11 @@
+﻿TO DO:
+
+(done) Saving and Loading System
+(done) Update DataGridView when Version Name Updated
+(done) Start Logic for Creating Presets
+
+- Create Preset Loading <<<
+	- Make it so it wont send mod from storage to active if it is already in active
+- Create List of Files to Ignore Entirely
+
+- Everything else lol

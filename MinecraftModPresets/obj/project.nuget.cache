@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MQWNrmOrPjKFdZRCTdPErmv3CgEo43aRg6Q1zKPw5dLPXakF3ziRrt5/MNphtabhWGuP/0AKfgn9TQY4BU6t7w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Owner\\source\\repos\\_Projects\\MinecraftModPresets\\MinecraftModPresets\\MinecraftModPresets.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Owner\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
