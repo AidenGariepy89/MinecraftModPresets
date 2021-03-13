@@ -92,7 +92,7 @@ namespace MinecraftModPresets
             List<string> moveToStorageMods = GetModPathsToMoveIntoStorage(preset);
             List<string> moveToActiveMods = GetModPathsToMoveIntoActive(preset);
 
-            foreach (var mod in moveToStorageMods)
+            /*foreach (var mod in moveToStorageMods)
             {
                 _ = MessageBox.Show($"To Storage: {mod}");
             }
@@ -100,13 +100,15 @@ namespace MinecraftModPresets
             foreach (var mod in moveToActiveMods)
             {
                 _ = MessageBox.Show($"To Active: {mod}");
-            }
+            }*/
+
+            //MoveModFiles(moveToStorageMods, Version.StorageFolderPath);
         }
 
         /// <summary>
-        /// Gets the Paths of Mods to Move to the Storage Folder
+        /// Gets the Paths of Mods to Move to the Storage Folder.
         /// </summary>
-        /// <param name="preset"> The Preset of Mods to become Active </param>
+        /// <param name="preset"> The Preset of Mods to become Active. </param>
         /// <returns> 
         /// A list of mod paths that does not have the same path as any active mod's path,
         /// or the same file name as any active mod file name. Same for forever mods.
@@ -155,6 +157,11 @@ namespace MinecraftModPresets
             return modsToMove;
         }
 
+        /// <summary>
+        /// Gets the Paths of Mods to Move to the Active Folder.
+        /// </summary>
+        /// <param name="preset"> The Preset of Mods to become Active. </param>
+        /// <returns> A list of mod paths that are in the selected preset list and are not already in the active folder. </returns>
         private List<string> GetModPathsToMoveIntoActive(Preset preset)
         {
             var modsToMove = new List<string>();
@@ -203,6 +210,14 @@ namespace MinecraftModPresets
 
             return modsToMove;
         }
+
+        //private void MoveModFiles(List<string> modsToMove, string directoryPath)
+        //{
+        //    foreach (var mod in modsToMove)
+        //    {
+
+        //    }
+        //}
 
         #endregion
 
