@@ -26,6 +26,8 @@ namespace MinecraftModPresets
         /// <summary>
         /// True if window is in edit mode.
         /// </summary>
+        private List<string> ModsInActiveFolder { get; set; }
+        private List<string> ModsInStorageFolder { get; set; }
         private bool IsEdit { get; set; } = false;
 
         private int VersionIndex { get; set; }
