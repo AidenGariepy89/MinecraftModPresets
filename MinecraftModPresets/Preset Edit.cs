@@ -17,7 +17,9 @@ namespace MinecraftModPresets
         private PresetsPage ReferencePresets { get; set; }
         private MinecraftVersion Version { get; set; }
         private Preset PresetToEdit { get; set; }
-        private List<Mod> ModsToEdit { get; set; }
+
+        private List<string> ModsToEdit { get; set; }
+        //private List<Mod> ModsToEdit { get; set; }
 
         private DataTable modsTable;
 
@@ -31,7 +33,8 @@ namespace MinecraftModPresets
             ReferencePresets = presetsPage;
             Version = version;
             PresetToEdit = preset;
-            ModsToEdit = new List<Mod>();
+            //ModsToEdit = new List<Mod>();
+            ModsToEdit = new List<string>();
 
             InitializeComponent();
         }
@@ -47,10 +50,15 @@ namespace MinecraftModPresets
             ModsInPresetDataGridView.Columns["Name"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             PresetNameTextBox.Text = PresetToEdit.Name;
-            foreach (var mod in PresetToEdit.Mods)
+            /* foreach (var mod in PresetToEdit.Mods)
+            {
+                AddMod(mod);
+            } */
+            foreach (var mod in PresetToEdit.ModPaths)
             {
                 AddMod(mod);
             }
+
             AddActiveModsButton.Enabled = false;
             AddStoredModsButton.Enabled = false;
         }
@@ -59,11 +67,18 @@ namespace MinecraftModPresets
 
         #region Methods
 
-        private void AddMod(Mod mod)
+        /* private void AddMod(Mod mod)
         {
             ModsToEdit.Add(mod);
 
             modsTable.Rows.Add(mod.Name);
+        } */
+
+        private void AddMod(string mod)
+        {
+            ModsToEdit.Add(mod);
+
+            modsTable.Rows.Add(Path.GetFileName(mod));
         }
 
         #endregion
@@ -96,7 +111,8 @@ namespace MinecraftModPresets
             }
 
             PresetToEdit.Name = name;
-            PresetToEdit.Mods = ModsToEdit;
+            //PresetToEdit.Mods = ModsToEdit;
+            PresetToEdit.ModPaths = ModsToEdit;
 
             ReferencePresets.RefreshPresetsDataGridView();
             ReferencePresets.Show();
@@ -104,6 +120,28 @@ namespace MinecraftModPresets
         }
 
         private void AddActiveModsButton_Click(object sender, EventArgs e)
+        {
+            foreach (var modFile in Version.ModsInActiveFolder)
+            {
+                bool addFile = true;
+
+                if (IgnoreForeverModsCheckBox.Checked == true)
+                {
+                    foreach (var foreverMod in Version.ForeverMods)
+                    {
+                        if (foreverMod == modFile)
+                            addFile = false;
+                    }
+                }
+
+                if (addFile)
+                    AddMod(modFile);
+            }
+
+            AddActiveModsButton.Enabled = false;
+        }
+
+        /* private void AddActiveModsButton_Click(object sender, EventArgs e)
         {
             var activeDir = Version.ActiveFolderPath;
             string[] modJarFiles = Directory.GetFiles(activeDir, "*.jar");
@@ -160,9 +198,31 @@ namespace MinecraftModPresets
             }
 
             AddActiveModsButton.Enabled = false;
-        }
+        } */
 
         private void AddStoredModsButton_Click(object sender, EventArgs e)
+        {
+            foreach (var modFile in Version.ModsInStorageFolder)
+            {
+                bool addFile = true;
+
+                if (IgnoreForeverModsCheckBox.Checked == true)
+                {
+                    foreach (var foreverMod in Version.ForeverMods)
+                    {
+                        if (foreverMod == modFile)
+                            addFile = false;
+                    }
+                }
+
+                if (addFile)
+                    AddMod(modFile);
+            }
+
+            AddStoredModsButton.Enabled = false;
+        }
+
+        /* private void AddStoredModsButton_Click(object sender, EventArgs e)
         {
             var activeDir = Version.StorageFolderPath;
             string[] modJarFiles = Directory.GetFiles(activeDir, "*.jar");
@@ -219,7 +279,7 @@ namespace MinecraftModPresets
             }
 
             AddStoredModsButton.Enabled = false;
-        }
+        } */
 
         private void ClearModsButton_Click(object sender, EventArgs e)
         {

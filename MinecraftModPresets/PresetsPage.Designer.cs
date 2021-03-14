@@ -89,7 +89,6 @@ namespace MinecraftModPresets
             this.PresetsDataGridView.RowTemplate.Height = 25;
             this.PresetsDataGridView.Size = new System.Drawing.Size(366, 420);
             this.PresetsDataGridView.TabIndex = 6;
-            this.PresetsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PresetsDataGridView_CellClick);
             // 
             // CreatePresetButton
             // 

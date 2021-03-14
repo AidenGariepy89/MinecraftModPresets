@@ -16,7 +16,9 @@ namespace MinecraftModPresets
         #region Class Declarations
         private PresetsPage ReferencePresets { get; set; }
         private MinecraftVersion Version { get; set; }
-        private List<Mod> ModsToAdd { get; set; }
+        //private List<Mod> ModsToAdd { get; set; }
+
+        private List<string> ModsToAdd { get; set; }
 
         private DataTable modsTable;
 
@@ -29,7 +31,8 @@ namespace MinecraftModPresets
         {
             ReferencePresets = presetsPage;
             Version = version;
-            ModsToAdd = new List<Mod>();
+            //ModsToAdd = new List<Mod>();
+            ModsToAdd = new List<string>();
 
             InitializeComponent();
         }
@@ -51,12 +54,19 @@ namespace MinecraftModPresets
 
         #region Methods
 
-        private void AddMod(Mod mod)
+        private void AddMod(string mod)
+        {
+            ModsToAdd.Add(mod);
+
+            modsTable.Rows.Add(Path.GetFileName(mod));
+        }
+
+        /* private void AddMod(Mod mod)
         {
             ModsToAdd.Add(mod);
 
             modsTable.Rows.Add(mod.Name, mod.Id);
-        }
+        } */
 
         #endregion
 
@@ -86,7 +96,8 @@ namespace MinecraftModPresets
                 return;
             }
 
-            Version.Presets.Add(new Preset() { Name = name , Mods = ModsToAdd, Id = Tools.CreateId() });
+            //Version.Presets.Add(new Preset() { Name = name , Mods = ModsToAdd, Id = Tools.CreateId() });
+            Version.Presets.Add(new Preset() { Name = name, ModPaths = ModsToAdd, Id = Tools.CreateId() });
 
             ReferencePresets.RefreshPresetsDataGridView();
             ReferencePresets.Show();
@@ -94,6 +105,29 @@ namespace MinecraftModPresets
         }
 
         private void AddActiveMods_Click(object sender, EventArgs e)
+        {
+            foreach (var modFile in Version.ModsInActiveFolder)
+            {
+                bool addFile = true;
+
+                if (IgnoreForeverModsCheckBox.Checked == true)
+                {
+                    foreach (var foreverMod in Version.ForeverMods)
+                    {
+                        if (foreverMod == modFile)
+                            addFile = false;
+                    }
+                }
+
+                if (addFile)
+                    AddMod(modFile);
+                //ModsToAdd.Add(modFile);
+            }
+
+            AddActiveModsButton.Enabled = false;
+        }
+
+        /* private void AddActiveMods_Click(object sender, EventArgs e)
         {
             var activeDir = Version.ActiveFolderPath;
             string[] modJarFiles = Directory.GetFiles(activeDir, "*.jar");
@@ -150,9 +184,31 @@ namespace MinecraftModPresets
             }
 
             AddActiveModsButton.Enabled = false;
-        }
+        } */
 
         private void AddStoredMods_Click(object sender, EventArgs e)
+        {
+            foreach (var modFile in Version.ModsInStorageFolder)
+            {
+                bool addFile = true;
+
+                if (IgnoreForeverModsCheckBox.Checked == true)
+                {
+                    foreach (var foreverMod in Version.ForeverMods)
+                    {
+                        if (foreverMod == modFile)
+                            addFile = false;
+                    }
+                }
+
+                if (addFile)
+                    AddMod(modFile);
+            }
+
+            AddStoredModsButton.Enabled = false;
+        }
+
+        /* private void AddStoredMods_Click(object sender, EventArgs e)
         {
             var activeDir = Version.StorageFolderPath;
             string[] modJarFiles = Directory.GetFiles(activeDir, "*.jar");
@@ -209,7 +265,7 @@ namespace MinecraftModPresets
             }
 
             AddStoredModsButton.Enabled = false;
-        }
+        } */
 
         private void ClearModsButton_Click(object sender, EventArgs e)
         {

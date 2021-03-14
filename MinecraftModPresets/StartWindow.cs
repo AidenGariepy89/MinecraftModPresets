@@ -114,7 +114,8 @@ namespace MinecraftModPresets
         {
             Versions.Add(version);
             version.Presets = new List<Preset>();
-            version.ForeverMods = new List<Mod>();
+            //version.ForeverMods = new List<Mod>();
+            version.ForeverMods = new List<string>();
 
             versionsTable.Rows.Add(version.Name, version.Id);
         }

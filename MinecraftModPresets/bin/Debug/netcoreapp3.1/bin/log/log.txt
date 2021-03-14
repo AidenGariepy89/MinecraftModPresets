@@ -35,3 +35,26 @@ Log > Startup
 
 Log > Exiting
 
+Log > Startup
+
+Log > Version please work created
+Log > Saved Version please work to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\please work_236287_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Saved Version please work to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\please work_236287_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Deleted please work
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+

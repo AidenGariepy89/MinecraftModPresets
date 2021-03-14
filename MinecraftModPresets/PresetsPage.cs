@@ -43,6 +43,9 @@ namespace MinecraftModPresets
             presetsTable = new DataTable();
             modsInPresetTable = new DataTable();
 
+            Version.ModsInActiveFolder = new List<string>();
+            Version.ModsInStorageFolder = new List<string>();
+
             presetsTable.Columns.Add("Name", typeof(string));
             presetsTable.Columns.Add("Id", typeof(int));
             modsInPresetTable.Columns.Add("Name", typeof(string));
@@ -51,6 +54,7 @@ namespace MinecraftModPresets
             ModsInPresetDataGridView.DataSource = modsInPresetTable;
 
             RefreshPresetsDataGridView();
+            RefreshActiveAndStoredMods();
 
             PresetsDataGridView.Columns["Name"].Width = PresetsDataGridView.Width;
             PresetsDataGridView.Columns["Name"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -78,16 +82,40 @@ namespace MinecraftModPresets
             }
         }
 
-        private void LoadModsInDataGridView(List<Mod> mods)
+        private void RefreshActiveAndStoredMods()
+        {
+            Version.ModsInActiveFolder.Clear();
+            Version.ModsInStorageFolder.Clear();
+
+            IEnumerable<string> modsInActiveEnumerable =
+                from file in Directory.GetFiles(Version.ActiveFolderPath)
+                where file.ToLower().EndsWith(".jar") || file.ToLower().EndsWith(".zip")
+                select file;
+            foreach (var file in modsInActiveEnumerable)
+            {
+                Version.ModsInActiveFolder.Add(file);
+            }
+
+            IEnumerable<string> modsInStorageEnumerable =
+                from file in Directory.GetFiles(Version.StorageFolderPath)
+                where file.ToLower().EndsWith(".jar") || file.ToLower().EndsWith(".zip")
+                select file;
+            foreach (var file in modsInStorageEnumerable)
+            {
+                Version.ModsInStorageFolder.Add(file);
+            }
+        }
+
+        /* private void LoadModsInDataGridView(List<Mod> mods)
         {
             modsInPresetTable.Rows.Clear();
             foreach (var mod in mods)
             {
                 modsInPresetTable.Rows.Add(mod.Name);
             }
-        }
+        } */
 
-        private void LoadPreset(Preset preset)
+        /* private void LoadPreset(Preset preset)
         {
             List<string> moveToStorageMods = GetModPathsToMoveIntoStorage(preset);
             List<string> moveToActiveMods = GetModPathsToMoveIntoActive(preset);
@@ -101,7 +129,7 @@ namespace MinecraftModPresets
             {
                 _ = MessageBox.Show($"To Active: {mod}");
             }
-        }
+        } */
 
         /// <summary>
         /// Gets the Paths of Mods to Move to the Storage Folder
@@ -111,7 +139,7 @@ namespace MinecraftModPresets
         /// A list of mod paths that does not have the same path as any active mod's path,
         /// or the same file name as any active mod file name. Same for forever mods.
         /// </returns>
-        private List<string> GetModPathsToMoveIntoStorage(Preset preset)
+        /* private List<string> GetModPathsToMoveIntoStorage(Preset preset)
         {
             var modsToMove = new List<string>();
             var foreverMods = Version.ForeverMods;
@@ -153,9 +181,9 @@ namespace MinecraftModPresets
             }
 
             return modsToMove;
-        }
+        } */
 
-        private List<string> GetModPathsToMoveIntoActive(Preset preset)
+        /* private List<string> GetModPathsToMoveIntoActive(Preset preset)
         {
             var modsToMove = new List<string>();
             var foreverMods = Version.ForeverMods;
@@ -202,7 +230,7 @@ namespace MinecraftModPresets
             }
 
             return modsToMove;
-        }
+        } */
 
         #endregion
 
@@ -243,17 +271,6 @@ namespace MinecraftModPresets
             }
         }
 
-        private void PresetsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                if (e.RowIndex <= Version.Presets.Count)
-                {
-                    LoadModsInDataGridView(Version.Presets[e.RowIndex].Mods);
-                }
-            }
-        }
-
         private void EditPresetButton_Click(object sender, EventArgs e)
         {
             if (PresetsDataGridView.Rows.Count != 0)
@@ -271,14 +288,14 @@ namespace MinecraftModPresets
 
         private void LoadPresetButton_Click(object sender, EventArgs e)
         {
-            if (PresetsDataGridView.Rows.Count != 0)
+            /* if (PresetsDataGridView.Rows.Count != 0)
             {
                 var index = PresetsDataGridView.CurrentCell.RowIndex;
                 if (index >= 0)
                 {
                     LoadPreset(Version.Presets[index]);
                 }
-            }
+            } */
         }
 
         #endregion
