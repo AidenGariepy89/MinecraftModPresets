@@ -32,6 +32,10 @@ namespace MinecraftModPresets.library
         /// <summary>
         /// A Container of the Forever Mods.
         /// </summary>
-        public List<Mod> ForeverMods { get; set; }
+        public List<string> ForeverMods { get; set; }
+        //public List<Mod> ForeverMods { get; set; }
+
+        public List<string> ModsInActiveFolder { get; set; }
+        public List<string> ModsInStorageFolder { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace MinecraftModPresets.library
         /// <summary>
         /// The Container of Mods stored in the Preset.
         /// </summary>
-        public List<Mod> Mods { get; set; }
+        //public List<Mod> Mods { get; set; }
+
+        public List<string> ModPaths { get; set; }
     }
 }
