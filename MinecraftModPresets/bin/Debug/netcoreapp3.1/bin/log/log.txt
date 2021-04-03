@@ -58,3 +58,118 @@ Log > Startup
 
 Log > Exiting
 
+Log > Startup
+
+Log > Version a created
+Log > Exiting
+
+Log > Startup
+
+Log > Version 1 created
+Log > Exiting
+
+Log > Startup
+
+Log > Version 1 created
+Log > Saved Version 1 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1_815307_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Saved Version 1 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1_815307_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Saved Version 1 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1_815307_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Deleted 1
+Log > Exiting
+
+Log > Startup
+
+Log > Deleted 1
+Log > Startup
+
+Log > Deleted 1
+Log > Startup
+
+Log > Deleted 1
+Log > Startup
+
+Log > Deleted 1
+Log > Version a created
+Log > Deleted a
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Version 1 created
+Log > Saved Version 1 to C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\bin\Debug\netcoreapp3.1\bin\save\1_120314_Version.json
+Log > Saved
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Exiting
+
+Log > Startup
+
+Log > Startup
+
+Log > Startup
+
+Log > Startup
+
+Log > Exiting
+

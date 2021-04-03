@@ -20,7 +20,7 @@ namespace MinecraftModPresets
 
         private DataTable presetsTable;
 
-        private DataTable modsInPresetTable;
+        private DataTable activeModsTable;
 
         private ILogger logger = Tools.GetLogger();
 
@@ -35,32 +35,34 @@ namespace MinecraftModPresets
 
             InitializeComponent();
 
+            this.Text = $"{Version.Name} : Presets";
             VersionNameLabel.Text = Version.Name;
         }
 
         private void PresetsPage_Load(object sender, EventArgs e)
         {
             presetsTable = new DataTable();
-            modsInPresetTable = new DataTable();
+            activeModsTable = new DataTable();
 
             Version.ModsInActiveFolder = new List<string>();
             Version.ModsInStorageFolder = new List<string>();
 
             presetsTable.Columns.Add("Name", typeof(string));
             presetsTable.Columns.Add("Id", typeof(int));
-            modsInPresetTable.Columns.Add("Name", typeof(string));
+            activeModsTable.Columns.Add("Name", typeof(string));
 
             PresetsDataGridView.DataSource = presetsTable;
-            ModsInPresetDataGridView.DataSource = modsInPresetTable;
+            ActiveModsDataGridView.DataSource = activeModsTable;
 
             RefreshPresetsDataGridView();
             RefreshActiveAndStoredMods();
+            RefreshActiveModsDataGridView();
 
             PresetsDataGridView.Columns["Name"].Width = PresetsDataGridView.Width;
             PresetsDataGridView.Columns["Name"].SortMode = DataGridViewColumnSortMode.NotSortable;
             PresetsDataGridView.Columns["Id"].Visible = false;
-            ModsInPresetDataGridView.Columns["Name"].Width = ModsInPresetDataGridView.Width;
-            ModsInPresetDataGridView.Columns["Name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            ActiveModsDataGridView.Columns["Name"].Width = ActiveModsDataGridView.Width;
+            ActiveModsDataGridView.Columns["Name"].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         #endregion
@@ -106,139 +108,76 @@ namespace MinecraftModPresets
             }
         }
 
-        /* private void LoadModsInDataGridView(List<Mod> mods)
+        private void RefreshActiveModsDataGridView()
         {
-            modsInPresetTable.Rows.Clear();
-            foreach (var mod in mods)
-            {
-                modsInPresetTable.Rows.Add(mod.Name);
-            }
-        } */
+            activeModsTable.Rows.Clear();
+            ActiveModsDataGridView.CurrentCell = null;
 
-        /* private void LoadPreset(Preset preset)
+            foreach (var mod in Version.ModsInActiveFolder)
+            {
+                activeModsTable.Rows.Add(Path.GetFileName(mod));
+            }
+        }
+
+        private void ConfirmModFilesExist(List<string> modFiles)
         {
-            List<string> moveToStorageMods = GetModPathsToMoveIntoStorage(preset);
-            List<string> moveToActiveMods = GetModPathsToMoveIntoActive(preset);
-
-            /*foreach (var mod in moveToStorageMods)
+            for (var i = 0; i < modFiles.Count; i++)
             {
-                _ = MessageBox.Show($"To Storage: {mod}");
+                if (!File.Exists(modFiles[i]))
+                {
+                    var modMissing = new ModMissing(this, modFiles, i);
+                    modMissing.Show();
+                    Hide();
+                }
+            }
+        }
+
+        private void LoadPreset(Preset preset)
+        {
+            ConfirmModFilesExist(preset.ModPaths);
+
+            var moveToActiveMods = GetModsToMoveToActive(preset);
+            if (moveToActiveMods.Count > 0)
+            {
+                if (moveToActiveMods[0] == "--abort--")
+                {
+                    return;
+                }
             }
 
-            foreach (var mod in moveToActiveMods)
+            foreach (var file in moveToActiveMods)
             {
-                _ = MessageBox.Show($"To Active: {mod}");
+                MessageBox.Show(file);
             }
-        } */
 
-        /// <summary>
-        /// Gets the Paths of Mods to Move to the Storage Folder.
-        /// </summary>
-        /// <param name="preset"> The Preset of Mods to become Active. </param>
-        /// <returns> 
-        /// A list of mod paths that does not have the same path as any active mod's path,
-        /// or the same file name as any active mod file name. Same for forever mods.
-        /// </returns>
-        /* private List<string> GetModPathsToMoveIntoStorage(Preset preset)
+            MessageBox.Show("asdf");
+        }
+
+        private List<string> GetModsToMoveToActive(Preset preset)
         {
             var modsToMove = new List<string>();
-            var foreverMods = Version.ForeverMods;
-            var activeMods = preset.Mods;
 
-            IEnumerable<string> modFilesInActiveEnumerable =
-                from file in Directory.GetFiles(Version.ActiveFolderPath, "*.*")
-                where file.ToLower().EndsWith(".jar") || file.ToLower().EndsWith(".zip")
-                select file;
-            var modFilesInActive = new List<string>();
-            foreach (var file in modFilesInActiveEnumerable)
+            foreach (var modFile in preset.ModPaths)
             {
-                modFilesInActive.Add(file);
-            }
-
-            foreach (var file in modFilesInActive)
-            {
-                bool moveToStorage = true;
-                foreach (var activeMod in activeMods)
+                if (Path.GetDirectoryName(modFile) != Version.ActiveFolderPath)
                 {
-                    if (file == activeMod.FileName || Path.GetFileName(file) == activeMod.Name)
+                    foreach (var activeFile in Version.ModsInActiveFolder)
                     {
-                        moveToStorage = false;
-                    }
-                }
+                        if (Path.GetFileName(activeFile) == Path.GetFileName(modFile))
+                        {
+                            _ = MessageBox.Show($"A file with the name {Path.GetFileName(modFile)} already exists in the folder you are trying to move the file to. " +
+                                $"Aborting preset load.", "Warning", MessageBoxButtons.OK);
 
-                foreach (var foreverMod in foreverMods)
-                {
-                    if (file == foreverMod.FileName || Path.GetFileName(file) == foreverMod.Name)
-                    {
-                        moveToStorage = false;
+                            return new List<string>() { "--abort--" };
+                        }
                     }
-                }
 
-                if (moveToStorage)
-                {
-                    modsToMove.Add(file);
+                    modsToMove.Add(modFile);
                 }
             }
 
             return modsToMove;
-        } */
-
-        /* private List<string> GetModPathsToMoveIntoActive(Preset preset)
-        {
-            var modsToMove = new List<string>();
-            var foreverMods = Version.ForeverMods;
-            var activeMods = preset.Mods;
-
-            IEnumerable<string> modFilesInStorageEnumerable =
-                from file in Directory.GetFiles(Version.StorageFolderPath, "*.*")
-                where file.ToLower().EndsWith(".jar") || file.ToLower().EndsWith(".zip")
-                select file;
-            var modFilesInStorage = new List<string>();
-            foreach (var file in modFilesInStorageEnumerable)
-            {
-                modFilesInStorage.Add(file);
-            }
-
-            foreach (var file in modFilesInStorage)
-            {
-                bool moveToActive = false;
-                foreach (var activeMod in activeMods)
-                {
-                    if (file == activeMod.FileName || Path.GetFileName(file) == activeMod.Name)
-                    {
-                        moveToActive = true;
-                    }
-                }
-
-                foreach (var foreverMod in foreverMods)
-                {
-                    if (file == foreverMod.FileName)
-                    {
-                        moveToActive = true;
-                    }
-                }
-
-                if (File.Exists(Path.Combine(Version.ActiveFolderPath, Path.GetFileName(file))))
-                {
-                    moveToActive = false;
-                }
-
-                if (moveToActive)
-                {
-                    modsToMove.Add(file);
-                }
-            }
-
-            return modsToMove;
-        } */
-
-        //private void MoveModFiles(List<string> modsToMove, string directoryPath)
-        //{
-        //    foreach (var mod in modsToMove)
-        //    {
-
-        //    }
-        //}
+        }
 
         #endregion
 
@@ -273,7 +212,6 @@ namespace MinecraftModPresets
                     {
                         Version.Presets.Remove(presetToDelete);
                         RefreshPresetsDataGridView();
-                        modsInPresetTable.Rows.Clear();
                     }
                 }
             }
@@ -296,16 +234,147 @@ namespace MinecraftModPresets
 
         private void LoadPresetButton_Click(object sender, EventArgs e)
         {
-            /* if (PresetsDataGridView.Rows.Count != 0)
+            if (PresetsDataGridView.Rows.Count != 0)
             {
                 var index = PresetsDataGridView.CurrentCell.RowIndex;
                 if (index >= 0)
                 {
                     LoadPreset(Version.Presets[index]);
                 }
-            } */
+            }
         }
 
         #endregion
+
+        private void EditAlwaysModsButton_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
+
+
+/* private void LoadPreset(Preset preset)
+        {
+            List<string> moveToStorageMods = GetModPathsToMoveIntoStorage(preset);
+            List<string> moveToActiveMods = GetModPathsToMoveIntoActive(preset);
+
+            /*foreach (var mod in moveToStorageMods)
+            {
+                _ = MessageBox.Show($"To Storage: {mod}");
+            }
+
+            foreach (var mod in moveToActiveMods)
+            {
+                _ = MessageBox.Show($"To Active: {mod}");
+            }
+        } */
+
+/// <summary>
+/// Gets the Paths of Mods to Move to the Storage Folder.
+/// </summary>
+/// <param name="preset"> The Preset of Mods to become Active. </param>
+/// <returns> 
+/// A list of mod paths that does not have the same path as any active mod's path,
+/// or the same file name as any active mod file name. Same for forever mods.
+/// </returns>
+/* private List<string> GetModPathsToMoveIntoStorage(Preset preset)
+{
+    var modsToMove = new List<string>();
+    var foreverMods = Version.ForeverMods;
+    var activeMods = preset.Mods;
+
+    IEnumerable<string> modFilesInActiveEnumerable =
+        from file in Directory.GetFiles(Version.ActiveFolderPath, "*.*")
+        where file.ToLower().EndsWith(".jar") || file.ToLower().EndsWith(".zip")
+        select file;
+    var modFilesInActive = new List<string>();
+    foreach (var file in modFilesInActiveEnumerable)
+    {
+        modFilesInActive.Add(file);
+    }
+
+    foreach (var file in modFilesInActive)
+    {
+        bool moveToStorage = true;
+        foreach (var activeMod in activeMods)
+        {
+            if (file == activeMod.FileName || Path.GetFileName(file) == activeMod.Name)
+            {
+                moveToStorage = false;
+            }
+        }
+
+        foreach (var foreverMod in foreverMods)
+        {
+            if (file == foreverMod.FileName || Path.GetFileName(file) == foreverMod.Name)
+            {
+                moveToStorage = false;
+            }
+        }
+
+        if (moveToStorage)
+        {
+            modsToMove.Add(file);
+        }
+    }
+
+    return modsToMove;
+} */
+
+/* private List<string> GetModPathsToMoveIntoActive(Preset preset)
+{
+    var modsToMove = new List<string>();
+    var foreverMods = Version.ForeverMods;
+    var activeMods = preset.Mods;
+
+    IEnumerable<string> modFilesInStorageEnumerable =
+        from file in Directory.GetFiles(Version.StorageFolderPath, "*.*")
+        where file.ToLower().EndsWith(".jar") || file.ToLower().EndsWith(".zip")
+        select file;
+    var modFilesInStorage = new List<string>();
+    foreach (var file in modFilesInStorageEnumerable)
+    {
+        modFilesInStorage.Add(file);
+    }
+
+    foreach (var file in modFilesInStorage)
+    {
+        bool moveToActive = false;
+        foreach (var activeMod in activeMods)
+        {
+            if (file == activeMod.FileName || Path.GetFileName(file) == activeMod.Name)
+            {
+                moveToActive = true;
+            }
+        }
+
+        foreach (var foreverMod in foreverMods)
+        {
+            if (file == foreverMod.FileName)
+            {
+                moveToActive = true;
+            }
+        }
+
+        if (File.Exists(Path.Combine(Version.ActiveFolderPath, Path.GetFileName(file))))
+        {
+            moveToActive = false;
+        }
+
+        if (moveToActive)
+        {
+            modsToMove.Add(file);
+        }
+    }
+
+    return modsToMove;
+} */
+
+//private void MoveModFiles(List<string> modsToMove, string directoryPath)
+//{
+//    foreach (var mod in modsToMove)
+//    {
+
+//    }
+//}

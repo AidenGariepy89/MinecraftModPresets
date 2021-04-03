@@ -3,6 +3,7 @@
 (done) Saving and Loading System
 (done) Update DataGridView when Version Name Updated
 (done) Start Logic for Creating Presets
+(done) Removed Class 'Mod' in favor of path string for mods
 
 - Create Preset Loading <<<
 	(done) Make it so it wont send mod from storage to active if it is already in active

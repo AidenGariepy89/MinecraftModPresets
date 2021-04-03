@@ -4,6 +4,9 @@
     <Compile Update="CreateVersion.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ModMissing.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Preset Create.cs">
       <SubType>Form</SubType>
     </Compile>

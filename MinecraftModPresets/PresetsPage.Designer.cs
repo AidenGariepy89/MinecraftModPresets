@@ -37,11 +37,11 @@ namespace MinecraftModPresets
             this.EditPresetButton = new System.Windows.Forms.Button();
             this.DeletePresetButton = new System.Windows.Forms.Button();
             this.LoadPresetButton = new System.Windows.Forms.Button();
-            this.ModsInPresetDataGridView = new System.Windows.Forms.DataGridView();
-            this.ModsInPresetLabel = new System.Windows.Forms.Label();
+            this.ActiveModsDataGridView = new System.Windows.Forms.DataGridView();
+            this.ActiveModsLabel = new System.Windows.Forms.Label();
             this.EditAlwaysModsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PresetsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ModsInPresetDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActiveModsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // BackButton
@@ -130,29 +130,29 @@ namespace MinecraftModPresets
             this.LoadPresetButton.UseVisualStyleBackColor = true;
             this.LoadPresetButton.Click += new System.EventHandler(this.LoadPresetButton_Click);
             // 
-            // ModsInPresetDataGridView
+            // ActiveModsDataGridView
             // 
-            this.ModsInPresetDataGridView.AllowUserToAddRows = false;
-            this.ModsInPresetDataGridView.AllowUserToDeleteRows = false;
-            this.ModsInPresetDataGridView.AllowUserToResizeColumns = false;
-            this.ModsInPresetDataGridView.AllowUserToResizeRows = false;
-            this.ModsInPresetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ModsInPresetDataGridView.Location = new System.Drawing.Point(595, 78);
-            this.ModsInPresetDataGridView.MultiSelect = false;
-            this.ModsInPresetDataGridView.Name = "ModsInPresetDataGridView";
-            this.ModsInPresetDataGridView.ReadOnly = true;
-            this.ModsInPresetDataGridView.RowTemplate.Height = 25;
-            this.ModsInPresetDataGridView.Size = new System.Drawing.Size(512, 509);
-            this.ModsInPresetDataGridView.TabIndex = 8;
+            this.ActiveModsDataGridView.AllowUserToAddRows = false;
+            this.ActiveModsDataGridView.AllowUserToDeleteRows = false;
+            this.ActiveModsDataGridView.AllowUserToResizeColumns = false;
+            this.ActiveModsDataGridView.AllowUserToResizeRows = false;
+            this.ActiveModsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ActiveModsDataGridView.Location = new System.Drawing.Point(595, 78);
+            this.ActiveModsDataGridView.MultiSelect = false;
+            this.ActiveModsDataGridView.Name = "ActiveModsDataGridView";
+            this.ActiveModsDataGridView.ReadOnly = true;
+            this.ActiveModsDataGridView.RowTemplate.Height = 25;
+            this.ActiveModsDataGridView.Size = new System.Drawing.Size(512, 509);
+            this.ActiveModsDataGridView.TabIndex = 8;
             // 
-            // ModsInPresetLabel
+            // ActiveModsLabel
             // 
-            this.ModsInPresetLabel.AutoSize = true;
-            this.ModsInPresetLabel.Location = new System.Drawing.Point(595, 53);
-            this.ModsInPresetLabel.Name = "ModsInPresetLabel";
-            this.ModsInPresetLabel.Size = new System.Drawing.Size(160, 22);
-            this.ModsInPresetLabel.TabIndex = 5;
-            this.ModsInPresetLabel.Text = "Mods in Preset:";
+            this.ActiveModsLabel.AutoSize = true;
+            this.ActiveModsLabel.Location = new System.Drawing.Point(595, 53);
+            this.ActiveModsLabel.Name = "ActiveModsLabel";
+            this.ActiveModsLabel.Size = new System.Drawing.Size(210, 22);
+            this.ActiveModsLabel.TabIndex = 5;
+            this.ActiveModsLabel.Text = "Current Active Mods:";
             // 
             // EditAlwaysModsButton
             // 
@@ -163,6 +163,7 @@ namespace MinecraftModPresets
             this.EditAlwaysModsButton.TabIndex = 3;
             this.EditAlwaysModsButton.Text = "edit always mods";
             this.EditAlwaysModsButton.UseVisualStyleBackColor = true;
+            this.EditAlwaysModsButton.Click += new System.EventHandler(this.EditAlwaysModsButton_Click);
             // 
             // PresetsPage
             // 
@@ -170,13 +171,13 @@ namespace MinecraftModPresets
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1176, 639);
-            this.Controls.Add(this.ModsInPresetDataGridView);
+            this.Controls.Add(this.ActiveModsDataGridView);
             this.Controls.Add(this.LoadPresetButton);
             this.Controls.Add(this.DeletePresetButton);
             this.Controls.Add(this.EditPresetButton);
             this.Controls.Add(this.CreatePresetButton);
             this.Controls.Add(this.PresetsDataGridView);
-            this.Controls.Add(this.ModsInPresetLabel);
+            this.Controls.Add(this.ActiveModsLabel);
             this.Controls.Add(this.PresetsLabel);
             this.Controls.Add(this.VersionNameLabel);
             this.Controls.Add(this.EditAlwaysModsButton);
@@ -190,7 +191,7 @@ namespace MinecraftModPresets
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PresetsPage_FormClosing);
             this.Load += new System.EventHandler(this.PresetsPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PresetsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ModsInPresetDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActiveModsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,8 +207,8 @@ namespace MinecraftModPresets
         private System.Windows.Forms.Button EditPresetButton;
         private System.Windows.Forms.Button DeletePresetButton;
         private System.Windows.Forms.Button LoadPresetButton;
-        private System.Windows.Forms.DataGridView ModsInPresetDataGridView;
-        private System.Windows.Forms.Label ModsInPresetLabel;
+        private System.Windows.Forms.DataGridView ActiveModsDataGridView;
+        private System.Windows.Forms.Label ActiveModsLabel;
         private System.Windows.Forms.Button EditAlwaysModsButton;
     }
 }

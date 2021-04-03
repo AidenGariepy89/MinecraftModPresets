@@ -42,3 +42,4 @@ C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\obj\Debug\n
 C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\obj\Debug\netcoreapp3.1\MinecraftModPresets.dll
 C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\obj\Debug\netcoreapp3.1\MinecraftModPresets.pdb
 C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\obj\Debug\netcoreapp3.1\MinecraftModPresets.genruntimeconfig.cache
+C:\Users\Owner\source\gitHub\MinecraftModPresets\MinecraftModPresets\obj\Debug\netcoreapp3.1\MinecraftModPresets.ModMissing.resources

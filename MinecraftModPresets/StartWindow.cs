@@ -131,14 +131,17 @@ namespace MinecraftModPresets
         /// <param name="e"></param>
         private void DeleteVersionButton_Click(object sender, EventArgs e)
         {
-            var versionToDelete = Versions[VersionsDataGridView.CurrentCell.RowIndex];
-
-            DialogResult dr = MessageBox.Show($"Are you sure you want to delete {versionToDelete.Name}?", "Confirm Delete", MessageBoxButtons.YesNo);
-            if (dr == DialogResult.Yes)
+            if (VersionsDataGridView.Rows.Count > 0)
             {
-                RemoveVersion(versionToDelete, VersionsDataGridView.CurrentCell.RowIndex);
+                var versionToDelete = Versions[VersionsDataGridView.CurrentCell.RowIndex];
 
-                logger.LogMessage($"Deleted {versionToDelete.Name}", LogLevel.Debug);
+                DialogResult dr = MessageBox.Show($"Are you sure you want to delete {versionToDelete.Name}?", "Confirm Delete", MessageBoxButtons.YesNo);
+                if (dr == DialogResult.Yes)
+                {
+                    RemoveVersion(versionToDelete, VersionsDataGridView.CurrentCell.RowIndex);
+
+                    logger.LogMessage($"Deleted {versionToDelete.Name}", LogLevel.Debug);
+                }
             }
         }
 
@@ -178,13 +181,15 @@ namespace MinecraftModPresets
         /// <param name="e"></param>
         private void EditVersionButton_Click(object sender, EventArgs e)
         {
-            int versionSelectedIndex = VersionsDataGridView.CurrentCell.RowIndex;
-            var versionToEdit = Versions[versionSelectedIndex];
-            var editVersion = new CreateVersion(this, true, versionToEdit, versionSelectedIndex);
+            if (VersionsDataGridView.Rows.Count > 0)
+            {
+                int versionSelectedIndex = VersionsDataGridView.CurrentCell.RowIndex;
+                var versionToEdit = Versions[versionSelectedIndex];
+                var editVersion = new CreateVersion(this, true, versionToEdit, versionSelectedIndex);
 
-            editVersion.Show();
-            Hide();
-
+                editVersion.Show();
+                Hide();
+            }
         }
 
         /// <summary>
@@ -194,13 +199,16 @@ namespace MinecraftModPresets
         /// <param name="e"></param>
         private void OpenVersionButton_Click(object sender, EventArgs e)
         {
-            int versionSelectedIndex = VersionsDataGridView.CurrentCell.RowIndex;
-            var versionToOpen = Versions[versionSelectedIndex];
+            if (VersionsDataGridView.Rows.Count > 0)
+            {
+                int versionSelectedIndex = VersionsDataGridView.CurrentCell.RowIndex;
+                var versionToOpen = Versions[versionSelectedIndex];
 
-            var openVersion = new PresetsPage(this, versionToOpen);
+                var openVersion = new PresetsPage(this, versionToOpen);
 
-            openVersion.Show();
-            Hide();
+                openVersion.Show();
+                Hide();
+            }
         }
 
         #endregion
